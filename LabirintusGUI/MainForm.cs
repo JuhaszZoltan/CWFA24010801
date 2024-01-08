@@ -4,7 +4,7 @@ namespace LabirintusGUI
 {
     public partial class MainForm : Form
     {
-        public CheckBox[,] CbxMatrix { get; set; }
+        public CheckBox[,]? CbxMatrix { get; set; }
 
         public MainForm()
         {
