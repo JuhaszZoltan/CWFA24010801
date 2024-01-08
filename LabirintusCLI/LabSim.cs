@@ -7,10 +7,10 @@ namespace LabirintusCLI
         private List<string> adatsorok;
         private char[,] lab;
 
-        public bool KeresesKesz { get; set; }
+        public bool KeresesKesz { get; set; } = false;
         public int KijaratOszlopIndex { get; }
         public int KijaratSorIndex { get; }
-        public bool NincsMegoldas { get; set; }
+        public bool NincsMegoldas { get; set; } = false;
         public int OszlopokSzama { get; }
         public int SorokSzama { get; }
 
@@ -50,11 +50,9 @@ namespace LabirintusCLI
             Console.Clear();
             KiirLab();
 
-            bool keresesKesz = false;
-            bool nincsMegoldas = false;
             int r = 1;
             int c = 0;
-            while (!keresesKesz && !nincsMegoldas)
+            while (!KeresesKesz && !NincsMegoldas)
             {
                 Console.SetCursorPosition(c, r);
 
@@ -69,20 +67,22 @@ namespace LabirintusCLI
                     Console.ForegroundColor = ConsoleColor.Red;
                     lab[r, c] = '-';
                     Console.Write('-');
-                    Console.SetCursorPosition(c, r);
                     if (lab[r, c - 1] == 'o') c--;
                     else r--;
                 }
-                keresesKesz = r == KijaratSorIndex && c == KijaratOszlopIndex;
-                if (keresesKesz)
+                KeresesKesz = r == KijaratSorIndex && c == KijaratOszlopIndex;
+                if (KeresesKesz)
                 {
+                    Console.SetCursorPosition(c, r);
                     Console.ForegroundColor = ConsoleColor.Green;
                     lab[r, c] = 'o';
                     Console.Write('o');
                 }
-                nincsMegoldas = r == 1 && c == 0;
-                Thread.Sleep(500);
+                NincsMegoldas = r == 1 && c == 0;
+                Thread.Sleep(200);
             }
+            Console.SetCursorPosition(0, SorokSzama);
+            Console.WriteLine(NincsMegoldas ? "Nincs megoldás!" : "Útvonal megtalálva!");
         }
 
         public LabSim(string forras)
