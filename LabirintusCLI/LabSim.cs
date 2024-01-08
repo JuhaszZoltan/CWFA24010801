@@ -61,6 +61,7 @@ namespace LabirintusCLI
                 Console.ForegroundColor = ConsoleColor.Green;
                 lab[r, c] = 'o';
                 Console.Write('o');
+                Console.SetCursorPosition(c, r);
                 if (lab[r, c + 1] == ' ') c++;
                 else if (lab[r + 1, c] == ' ') r++;
                 else
@@ -68,6 +69,7 @@ namespace LabirintusCLI
                     Console.ForegroundColor = ConsoleColor.Red;
                     lab[r, c] = '-';
                     Console.Write('-');
+                    Console.SetCursorPosition(c, r);
                     if (lab[r, c - 1] == 'o') c--;
                     else r--;
                 }
